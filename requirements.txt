@@ -1,0 +1,10 @@
+torch
+transformers
+accelerate
+bitsandbytes
+psutil
+pynvml
+pandas
+matplotlib
+tqdm
+pyyaml

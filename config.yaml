@@ -1,0 +1,9 @@
+device: cpu
+
+models:
+  - name: DistilGPT2
+    id: distilgpt2
+
+dataset: data/prompts.jsonl
+max_new_tokens: 32
+output_dir: reports
