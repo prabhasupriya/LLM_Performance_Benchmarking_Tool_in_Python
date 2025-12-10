@@ -5,9 +5,7 @@ venv/
 __pycache__/
 *.pyc
 
-# Reports (optional; keep if you want tracked)
-reports/*.png
-reports/*.csv
+
 
 # OS files
 .DS_Store
