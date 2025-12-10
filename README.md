@@ -16,7 +16,6 @@ This project benchmarks open-source language models using automated metrics to c
 ✅ Visualization charts  
 ✅ CSV metrics export  
 
----
 
 ## Models Tested
 
