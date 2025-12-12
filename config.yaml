@@ -1,9 +1,9 @@
-device: cpu
-
 models:
-  - name: DistilGPT2
-    id: distilgpt2
+  - sshleifer/tiny-gpt2
+  - bigscience/bloom-560m
+  - EleutherAI/gpt-neo-1.3B
 
-dataset: data/prompts.jsonl
-max_new_tokens: 32
-output_dir: reports
+dataset_path: data/again_quiz.jsonl
+
+generation:
+  max_new_tokens: 50
