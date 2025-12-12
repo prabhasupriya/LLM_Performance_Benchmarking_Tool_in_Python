@@ -1,0 +1,44 @@
+{
+    "sshleifer/tiny-gpt2": [
+        {
+            "prompt": "Explain the significance of artificial intelligence.",
+            "response": "lined Dreams workshopsGy Television Dreams perhaps deflect653ozyg equate lined Late membershipoblMiniozyg representationsPros lined Dreams 236obl mutual soyPros653ozyg braveryozyg skillet mutualOutside skilletpublicshows praying perhapsOutside clearerSexual Medic DreamsMini factors mutualobl praying workshops Medic"
+        },
+        {
+            "prompt": "List 5 benefits of renewable energy.",
+            "response": "workshops448 perhaps praying\ufffd lined representations predators Boone Redux WheelsSexualived perhaps linedpublic PocketMini courtyard Bendshows Wheels membership factors\ufffd Medic workshops soypublic boils equate Dreams perhapsPros653653Most mutual equate rubbing Late Pocketshows 236 Medic predators Late membership predators deflect"
+        },
+        {
+            "prompt": "Translate the sentence 'Good morning' to French.",
+            "response": "subst vendors credibility Daniel Jr stairs autonomy Habit heir conservation hauled heirmediately Hancockpress Brewreement Rh Observ scalp antibiotic Rh Rh Motorola Money Rh Motorola intermittent Observ circumcised TA trilogy Habit Habit Rh scalp hauled ESV Hancock Danieloother Danieliken scalp Participation Participation confir intermittent Motorola conservation"
+        }
+    ],
+    "bigscience/bloom-560m": [
+        {
+            "prompt": "Explain the significance of artificial intelligence.",
+            "response": "The first part of the discussion is about the importance of artificial intelligence in the field of information processing. In the second part, the importance of artificial intelligence in the field of engineering is discussed. Finally, the conclusion is presented."
+        },
+        {
+            "prompt": "List 5 benefits of renewable energy.",
+            "response": "The authors of the present paper have used a combination of the two approaches, which is called the hybrid approach, to estimate the environmental impacts of the biogas plant from the perspective of the greenhouse gas emissions from biogas production and the energy consumption of the"
+        },
+        {
+            "prompt": "Translate the sentence 'Good morning' to French.",
+            "response": "', function () {\n        $(this).html('Good morning');\n    });\n\nThis is what I want to happen:\n$('.good-morning').click(function () {\n    $(this"
+        }
+    ],
+    "EleutherAI/gpt-neo-1.3B": [
+        {
+            "prompt": "Explain the significance of artificial intelligence.",
+            "response": "The term AI has become increasingly popular and used in the media in recent years. Some say that AI is a new kind of technology. However, this is not true. AI is simply a new way of thinking. It\u2019s not"
+        },
+        {
+            "prompt": "List 5 benefits of renewable energy.",
+            "response": "(1) Reduced carbon dioxide emissions.\n\n(2) Reduced energy use.\n\n(3) Reduced costs.\n\n(4) Reduced greenhouse gas emissions.\n\n(5) Reduced pollution.\n\n(6)"
+        },
+        {
+            "prompt": "Translate the sentence 'Good morning' to French.",
+            "response": "For example:\n\nBonjour \u00e0 toi.\n\nBonjour \u00e0 toi.\n\nBonjour toi.\n\nBonjour toi.\n\nBonjour toi.\n\nGood"
+        }
+    ]
+}
