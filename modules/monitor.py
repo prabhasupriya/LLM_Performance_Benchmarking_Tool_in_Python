@@ -5,7 +5,7 @@ try:
     nvmlInit()
     GPU_AVAILABLE = True
     handle = nvmlDeviceGetHandleByIndex(0)
-except:
+except Exception:
     GPU_AVAILABLE = False
 
 

@@ -1,66 +1,83 @@
-# main.py
-import importlib
-import modules.model_runner as mr
-import yaml, json, torch, os
+import argparse
+import yaml
+import os
+import pandas as pd
+from tqdm import tqdm
 
-# Reload module to avoid cache issues in VSCode
-importlib.reload(mr)
+from modules.loader import load_model
+from modules.data_loader import load_prompts
+from modules.metrics import measure_latency, calculate_throughput, vocab_diversity
+from modules.monitor import get_ram_usage, get_gpu_usage
+from modules.visualizer import create_latency_plot, create_memory_plot
 
-# Assign functions
-load_model = mr.load_model
-generate_response = mr.generate_response
 
-print("Modules reloaded successfully!")
+def main(config_path):
+    # Ensure reports folder exists
+    os.makedirs("reports", exist_ok=True)
 
-# Load config
-with open("config.yaml", "r") as f:
-    cfg = yaml.safe_load(f)
+    # Load configuration
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
 
-models = cfg["models"]
-dataset_path = cfg["dataset_path"]
-max_tokens = cfg["generation"]["max_new_tokens"]
+    # Load prompts from dataset
+    prompts = load_prompts(config["dataset_path"])
+    max_tokens = config["generation"]["max_new_tokens"]
 
-# Load prompts from JSONL
-prompts = []
-with open(dataset_path, "r") as f:
-    for line in f:
-        data = json.loads(line)
-        if "prompt" in data:
-            prompts.append(data["prompt"])
+    results = []
 
-print(f"Loaded {len(prompts)} prompts. First 3 prompts: {prompts[:3]}")
+    # Loop over models
+    for model_name in config["models"]:
+        print(f"\nLoading model: {model_name}")
+        model, tokenizer = load_model(model_name)
 
-# Set device
-device = "cuda" if torch.cuda.is_available() else "cpu"
-print("Using device:", device)
+        # Loop over prompts
+        for prompt in tqdm(prompts, desc=model_name):
+            ram_before = get_ram_usage()
+            gpu_before = get_gpu_usage()
 
-# Create reports folder if not exists
-os.makedirs("reports", exist_ok=True)
+            def infer():
+                inputs = tokenizer(prompt, return_tensors="pt")
+                return model.generate(**inputs, max_new_tokens=max_tokens)
 
-# Dictionary to save results
-all_responses = {}
+            output, latency = measure_latency(infer)
 
-# Run models
-for model_id in models:
-    print(f"\nLoading model: {model_id}")
-    tokenizer, model = load_model(model_id, device)
-    print(f"Model {model_id} loaded successfully!\n")
-    
-    model_responses = []
-    for i, prompt in enumerate(prompts):
-        print(f"Processing prompt {i+1}/{len(prompts)}: {prompt}")
-        response = generate_response(prompt, tokenizer, model, max_tokens)
-        print(f"Response:\n{response}\n")
-        model_responses.append({
-            "prompt": prompt,
-            "response": response
-        })
-    
-    all_responses[model_id] = model_responses
+            ram_after = get_ram_usage()
+            gpu_after = get_gpu_usage()
 
-# Save all responses
-output_path = "reports/model_responses.json"
-with open(output_path, "w", encoding="utf-8") as f:
-    json.dump(all_responses, f, indent=4, ensure_ascii=False)
+            token_count = output.shape[-1]
+            throughput = calculate_throughput(token_count, latency)
+            diversity = vocab_diversity(
+                tokenizer.decode(output[0], skip_special_tokens=True).split()
+            )
 
-print(f"All responses saved in {output_path}")
+            results.append({
+                "model": model_name,
+                "latency_s": latency,
+                "throughput_tps": throughput,
+                "ram_mb": ram_after - ram_before,
+                "gpu_mb": gpu_after - gpu_before,
+                "vocab_diversity": diversity
+            })
+
+    # Save raw metrics
+    df = pd.DataFrame(results)
+    df.to_csv("reports/metrics.csv", index=False)
+
+    # Aggregate results
+    summary = df.groupby("model").mean().reset_index()
+
+    # Generate plots
+    create_latency_plot(summary)
+    create_memory_plot(summary)
+
+    # Print summary
+    print("\n===== BENCHMARK SUMMARY =====")
+    print(summary)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="LLM Performance Benchmarking Tool")
+    parser.add_argument("--config", required=True, help="Path to config.yaml")
+    args = parser.parse_args()
+
+    main(args.config)

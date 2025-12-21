@@ -1,11 +1,7 @@
-import json
+from transformers import AutoTokenizer, AutoModelForCausalLM
 
-def load_prompts(path):
-    prompts = []
-
-    with open(path, "r", encoding="utf-8") as file:
-        for line in file:
-            data = json.loads(line)
-            prompts.append(data["prompt"])
-
-    return prompts
+def load_model(model_name):
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    model.eval()
+    return model, tokenizer

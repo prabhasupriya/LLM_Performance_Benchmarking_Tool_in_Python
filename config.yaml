@@ -1,9 +1,8 @@
 models:
   - sshleifer/tiny-gpt2
   - bigscience/bloom-560m
-  - EleutherAI/gpt-neo-1.3B
 
-dataset_path: data/again_quiz.jsonl
+dataset_path: data/prompts.jsonl
 
 generation:
   max_new_tokens: 50
