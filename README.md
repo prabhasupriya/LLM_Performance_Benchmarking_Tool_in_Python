@@ -30,17 +30,14 @@ To support CPU and GPU environments
 Model	Size	Environment
 sshleifer/tiny-gpt2	~6M params	Local CPU
 bigscience/bloom-560m	560M params	Local CPU
+EleutherAI/gpt-neo-1.3B	1.3B params	High-RAM system
+DistilGPT2	Medium	Optional
+Falcon-7B	Large	Colab GPU
+Pythia-2.8B	Large	Colab GPU
 
- ⚠️ Optional / Future Models
-The following models were considered but not benchmarked in this project due to hardware constraints:
-- EleutherAI/gpt-neo-1.3B (requires High-RAM system)
-- DistilGPT2 (medium, optional)
-- Falcon-7B (large, Colab GPU)
-- Pythia-2.8B (large, Colab GPU)
+⚠️ Larger models require sufficient RAM / GPU memory.
 
-
-
-## Project Structure
+📂 Project Structure
 LLM-Benchmarking-Tool/
 │
 ├── data/
@@ -64,13 +61,13 @@ LLM-Benchmarking-Tool/
 ├── requirements.txt
 └── README.md
 
-## Output Files
+📊 Output Files
 File	Description
 metrics.csv	Detailed benchmark metrics per prompt
 latency_plot.png	Average inference latency comparison
 memory_plot.png	Average RAM/GPU memory usage
 Console Summary	Mean metrics per model
-## Metrics Explained
+📈 Metrics Explained
 🔹 Latency (seconds)
 
 Time taken to generate output for a prompt.
@@ -91,12 +88,12 @@ Measured via NVIDIA NVML (if GPU available).
 
 Ratio of unique tokens to total tokens in output.
 
-## Sample Observation
+🧪 Sample Observation
 
 BLOOM-560M consumes significantly more memory than Tiny-GPT2, confirming the expected trade-off between model size and resource usage.
 Tiny-GPT2 offers fast inference with minimal memory, while BLOOM delivers richer outputs at higher computational cost.
 
-## Setup Instructions
+🛠️ Setup Instructions
 1️⃣ Create Virtual Environment
 python -m venv venv
 
@@ -106,10 +103,10 @@ venv\Scripts\activate
 3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-## Running the Benchmark
+🚀 Running the Benchmark
 python main.py --config config.yaml
 
-## Configuration (config.yaml)
+🧾 Configuration (config.yaml)
 models:
   - sshleifer/tiny-gpt2
   - bigscience/bloom-560m
@@ -119,14 +116,14 @@ dataset_path: data/prompts.jsonl
 generation:
   max_new_tokens: 50
 
-### System Compatibility
+🖥️ System Compatibility
 Environment	Supported
-Windows	YES
-Linux	YES
-CPU	YES
-NVIDIA GPU	YES
-Google Colab	YES
-### Future Enhancements
+Windows	✅
+Linux	✅
+CPU	✅
+NVIDIA GPU	✅
+Google Colab	✅
+🔮 Future Enhancements
 
 Batch inference support
 
@@ -138,7 +135,7 @@ Web-based dashboard
 
 BLEU / ROUGE evaluation
 
-### Conclusion
+## Conclusion
 
 This tool provides a scalable, modular, and reproducible benchmarking pipeline for evaluating LLMs.
 It enables informed decisions when choosing models based on performance vs resource constraints, making it valuable for both academic research and practical deployment scenarios.
