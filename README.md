@@ -1,9 +1,9 @@
-LLM Performance Benchmarking Tool
+## LLM Performance Benchmarking Tool
 
 A CLI-based benchmarking framework designed to evaluate and compare open-source Large Language Models (LLMs) based on inference latency, throughput, memory consumption, and output quality.
 The tool helps understand performance–resource trade-offs across models of different sizes.
 
-📌 Project Objectives
+## Project Objectives
 
 To measure inference performance of LLMs in a standardized manner
 
@@ -15,7 +15,7 @@ To generate visual and tabular benchmark reports
 
 To support CPU and GPU environments
 
-⚙️ Key Features
+## Key Features
 
 ✅ Config-driven benchmarking via YAML
 ✅ HuggingFace Transformer model support
@@ -26,18 +26,19 @@ To support CPU and GPU environments
 ✅ Automatic CSV report generation
 ✅ Visualization plots for performance comparison
 
-🧠 Models Evaluated
+## Models Evaluated
 Model	Size	Environment
 sshleifer/tiny-gpt2	~6M params	Local CPU
 bigscience/bloom-560m	560M params	Local CPU
+
+
+⚠️ OPTIONAL /Larger models require sufficient RAM / GPU memory.
 EleutherAI/gpt-neo-1.3B	1.3B params	High-RAM system
 DistilGPT2	Medium	Optional
 Falcon-7B	Large	Colab GPU
 Pythia-2.8B	Large	Colab GPU
 
-⚠️ Larger models require sufficient RAM / GPU memory.
-
-📂 Project Structure
+## Project Structure
 LLM-Benchmarking-Tool/
 │
 ├── data/
@@ -61,13 +62,13 @@ LLM-Benchmarking-Tool/
 ├── requirements.txt
 └── README.md
 
-📊 Output Files
+## Output Files
 File	Description
 metrics.csv	Detailed benchmark metrics per prompt
 latency_plot.png	Average inference latency comparison
 memory_plot.png	Average RAM/GPU memory usage
 Console Summary	Mean metrics per model
-📈 Metrics Explained
+## Metrics Explained
 🔹 Latency (seconds)
 
 Time taken to generate output for a prompt.
@@ -88,12 +89,12 @@ Measured via NVIDIA NVML (if GPU available).
 
 Ratio of unique tokens to total tokens in output.
 
-🧪 Sample Observation
+## Sample Observation
 
 BLOOM-560M consumes significantly more memory than Tiny-GPT2, confirming the expected trade-off between model size and resource usage.
 Tiny-GPT2 offers fast inference with minimal memory, while BLOOM delivers richer outputs at higher computational cost.
 
-🛠️ Setup Instructions
+## Setup Instructions
 1️⃣ Create Virtual Environment
 python -m venv venv
 
@@ -103,10 +104,10 @@ venv\Scripts\activate
 3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-🚀 Running the Benchmark
+## Running the Benchmark
 python main.py --config config.yaml
 
-🧾 Configuration (config.yaml)
+## Configuration (config.yaml)
 models:
   - sshleifer/tiny-gpt2
   - bigscience/bloom-560m
@@ -116,14 +117,14 @@ dataset_path: data/prompts.jsonl
 generation:
   max_new_tokens: 50
 
-🖥️ System Compatibility
+## System Compatibility
 Environment	Supported
-Windows	✅
-Linux	✅
-CPU	✅
-NVIDIA GPU	✅
-Google Colab	✅
-🔮 Future Enhancements
+Windows	YES
+Linux	YES
+CPU	YES
+NVIDIA GPU	YES
+Google Colab	YES
+## Future Enhancements
 
 Batch inference support
 
